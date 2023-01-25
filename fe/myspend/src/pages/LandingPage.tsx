@@ -1,5 +1,6 @@
 import { Box } from "@chakra-ui/react";
 import FirstContent from "../components/landing/firstcontent";
+import SecondContent from "../components/landing/secondcontent";
 import Navbar from "../components/navbar";
 
 const LandingPage = () => {
@@ -7,6 +8,7 @@ const LandingPage = () => {
         <Box>
             <Navbar></Navbar>
             <FirstContent></FirstContent>
+            <SecondContent></SecondContent>
         </Box>
     )
 };

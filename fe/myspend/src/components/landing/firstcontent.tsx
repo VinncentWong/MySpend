@@ -16,23 +16,22 @@ const FirstContent = () => {
     const [index, setIndex] = React.useState<number>(0);
 
     useEffect(() => {
-        if(index == 3){
+        if(index === 3){
             setIndex(0);
         }
-        setTimeout(() => setIndex(index + 1), 5000);  
+        setTimeout(() => setIndex(index + 1), 2000);  
     }, [index]);
 
     return(
         <Box 
-        border='4px solid black'
         background='linear-gradient(360deg, #EDE0F1 60.01%, #EDEFFB 103.33%)'
         height='100%'
         display='flex'
-        flexDir='row'>
+        flexDir='row'
+        flexWrap='wrap'>
             <Box
             position='relative'
-            width='50%'
-            border = '4px solid yellow'>
+            width='50%'>
                 <Fade in>
                     <Text
                     fontFamily={{font}}
