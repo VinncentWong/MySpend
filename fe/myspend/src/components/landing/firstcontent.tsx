@@ -1,11 +1,9 @@
 import { Box, Button, Fade, Image, Text } from "@chakra-ui/react";
 import React, { useEffect, useMemo } from "react";
-import { fontFamily } from '../../styling/style';
+import { fontFamilyInter } from '../../styling/style';
 import { ArrowForwardIcon } from "@chakra-ui/icons";
 
 const FirstContent = () => {
-
-    const font = 'Inter, sans-serif';
 
     const textArray = [ 
         'Manage your finance through one website',
@@ -18,6 +16,7 @@ const FirstContent = () => {
     useEffect(() => {
         if(index === 3){
             setIndex(0);
+            return;
         }
         setTimeout(() => setIndex(index + 1), 2000);  
     }, [index]);
@@ -25,7 +24,7 @@ const FirstContent = () => {
     return(
         <Box 
         background='linear-gradient(360deg, #EDE0F1 60.01%, #EDEFFB 103.33%)'
-        height='100%'
+        height='110vh'
         display='flex'
         flexDir='row'
         flexWrap='wrap'>
@@ -34,7 +33,7 @@ const FirstContent = () => {
             width='50%'>
                 <Fade in>
                     <Text
-                    fontFamily={{font}}
+                    fontFamily={{fontFamilyInter}}
                     fontWeight={600}
                     color='#215C94'
                     fontSize={{
@@ -48,6 +47,7 @@ const FirstContent = () => {
                     </Text>
                 </Fade>
                 <Button
+                colorScheme='blue'
                 backgroundColor='#215C94'
                 position='relative'
                 top='80%'
@@ -57,7 +57,7 @@ const FirstContent = () => {
                     <Box
                     width='60%'>
                         <Text
-                        fontFamily={fontFamily}
+                        fontFamily={fontFamilyInter}
                         fontSize={{
                             'lg' : '14px'
                         }}
@@ -68,35 +68,13 @@ const FirstContent = () => {
             </Box>
             <Box
             backgroundImage='./hp.jpg'
-            zIndex='2'
             blendMode='multiply'
             backgroundRepeat='no-repeat'
-            boxSize='45%'
+            width='50%'
+            height='100%'
             backgroundSize='cover'
             position='relative'
             right='4%'>
-                <br></br>
-                <br></br>
-                <br></br>
-                <br></br>
-                <br></br>
-                <br></br>
-                <br></br>
-                <br></br>
-                <br></br>
-                <br></br>
-                <br></br>
-                <br></br>
-                <br></br>
-                <br></br>
-                <br></br>
-                <br></br>
-                <br></br>
-                <br></br>
-                <br></br>
-                <br></br>
-                <br></br>
-                <br></br>
             </Box>
         </Box>
     )
