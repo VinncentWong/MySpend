@@ -1,5 +1,5 @@
 import { Box, Flex, Image, Link, Text } from "@chakra-ui/react"
-import { fontFamily } from "../../styling/style";
+import { fontFamilyNunito as fontFamily } from "../../styling/style";
 import { textSize } from "../../styling/textsize";
 const black = '#1A2127';
 
@@ -7,7 +7,8 @@ const Navbar = () => {
     return(
         <Flex 
         flexDir='row'
-        backgroundColor='#EDE0F1'>
+        backgroundColor='#EDE0F1'
+        flexWrap='wrap'>
             <Box 
             width='15%'
             height='100%'
@@ -35,7 +36,8 @@ const Navbar = () => {
                 'lg' : '4rem'
             }}
             alignItems={'center'}
-            width='30%'>
+            width='30%'
+            flexWrap='wrap'>
                 <Link><Text
                 fontFamily={fontFamily}
                 fontSize={textSize}
