@@ -7,14 +7,21 @@ const ThirdContent = () => {
     return(
         <Box>
             <Box
-            width='53%'
-            marginLeft='26%'
+            width={{
+                'sm' : '60%',
+                'lg' : '53%'
+            }}
+            marginLeft={{
+                'sm' : '20%',
+                'lg' : '26%'
+            }}
             marginTop='3%'>
                 <Text
                 color={blue}
                 fontFamily={fontFamilyInter}
                 fontWeight={600}
                 fontSize={{
+                    'sm' : '23px',
                     'lg' : '46px'
                 }}>
                     Take a deeper dive into a 
@@ -25,15 +32,22 @@ const ThirdContent = () => {
             width='100%'
             height='100%'
             gap={10}
-            marginTop='7%'>
+            marginTop='7%'
+            flexWrap={{
+                'sm' : 'wrap',
+                'lg' : 'nowrap'
+            }}>
                 <Flex
                 flexDir='column'
                 flexWrap='wrap'
-                width='30%'
+                width={{
+                    'sm' : '100%',
+                    'lg' : '30%'
+                }}
                 marginLeft='5%'>
                     <Card
                     direction={{
-                        'lg' : 'column'
+                        'sm' : 'column'
                     }}
                     width='90%'
                     height='95%'
@@ -47,7 +61,8 @@ const ThirdContent = () => {
                         fontSize={{
                             'lg' : '16px'
                         }}
-                        marginLeft='9%'>Collection</CardHeader>
+                        marginLeft='9%'
+                        height={[null, '10%', null, null]}>Collection</CardHeader>
                         <CardBody>
                             <Heading 
                             fontFamily={fontFamilyInter}
@@ -95,9 +110,13 @@ const ThirdContent = () => {
                 <Flex
                 flexDir='column'
                 flexWrap='wrap'
-                width='25%'
+                width={{
+                    'sm' : '80%',
+                    'lg' : '25%'
+                }}
                 alignItems='center'
-                gap={3}>
+                gap={3}
+                marginLeft={[null, '11%', null, '5%']}>
                     <Image
                     src='/chart.png'
                     width='80%'></Image>
@@ -137,18 +156,31 @@ const ThirdContent = () => {
                     </Stack>
                 </Flex>
                 <Flex
-                flexDir='column'
+                flexDir={{
+                    'sm' : 'row',
+                    'lg' : 'column'
+                }}
                 flexWrap='wrap'
-                width='25%'
+                width={{
+                    'sm' : '100%',
+                    'lg' : '25%'
+                }}
+                height={{
+                    'sm' : '50%',
+                    'lg' : '100%'
+                }}
                 alignItems='center'
-                gap={3}>
+                gap={3}
+                marginLeft={[null, '10%', null, '5%']}
+                marginRight={'3rem'}>
                     <Image
                     src='/chart_bro.png'
                     width='80%'></Image>
                     <Stack gap={6}
                     alignItems='center'
                     width='100%'
-                    height='60%'>
+                    height='100%'
+                    position='relative'>
                         <Text
                         fontSize={{
                             'lg' : '14px'
@@ -165,12 +197,15 @@ const ThirdContent = () => {
                         fontWeight='600'
                         textOverflow='ellipsis'
                         width='100%'
-                        alignSelf='flex-start'>
+                        alignSelf='flex-start'
+                        marginBottom={{
+                            'lg' : '5%'
+                        }}>
                             Yuk Lebih Melek Finansial dengan 4 Cara Ini!
                         </Text>
                         <Box
-                        position='relative'
-                        top='14%'
+                        position={{'lg' : 'absolute'}}
+                        top='135%'
                         alignSelf='flex-end'>
                             <Button 
                             rightIcon={<ArrowForwardIcon color={blue}/>} 
