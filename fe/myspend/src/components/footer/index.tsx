@@ -5,18 +5,24 @@ const Footer = () => {
     return(
         <Flex
         width='100%'
-        height='60vh'
+        height={{
+            'sm' : 'clamp(10rem, 25vh, 12rem)',
+            'lg' : 'clamp(15rem, 60vh, 30rem)'
+        }}
         flexDir='row'
         justifyContent='center'
         backgroundColor={blue}
         backgroundSize='cover'>
             <Stack
-            width='50%'
+            width={{
+                'lg' : '50%'
+            }}
             height='80%'
             marginTop='5%'>
                 <Text
                 fontFamily={fontFamilyInter}
                 fontSize={{
+                    'sm' : '23px',
                     'lg' : '46px'
                 }}
                 color='white'
