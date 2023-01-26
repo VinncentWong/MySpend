@@ -26,17 +26,39 @@ const FirstContent = () => {
         background='linear-gradient(360deg, #EDE0F1 60.01%, #EDEFFB 103.33%)'
         height='110vh'
         display='flex'
-        flexDir='row'
+        flexDir={{
+            'sm' : 'column-reverse',
+            'lg' : 'row'
+        }}
         flexWrap='wrap'>
             <Box
             position='relative'
-            width='50%'>
+            width={{
+                'sm' : '70%',
+                'lg' : '50%'
+            }}
+            height={{
+                'sm' : '25%',
+                'lg' : '90%'
+            }}
+            bottom={{
+                'sm' : '7%',
+                'lg' : undefined
+            }}
+            left={{
+                'sm' : '20%',
+                'lg' : '2%'
+            }}
+            top={{
+                'lg' : '3%'
+            }}>
                 <Fade in>
                     <Text
                     fontFamily={{fontFamilyInter}}
                     fontWeight={600}
                     color='#215C94'
                     fontSize={{
+                        'sm' : '23px',
                         'lg' : '55px'
                     }}
                     position='absolute'
@@ -52,7 +74,10 @@ const FirstContent = () => {
                 position='relative'
                 top='80%'
                 left='10%'
-                width='30%'
+                width={{
+                    'sm' : '60%',
+                    'lg' : '30%'
+                }}
                 rightIcon={<ArrowForwardIcon color='white'/>}>
                     <Box
                     width='60%'>
@@ -70,11 +95,22 @@ const FirstContent = () => {
             backgroundImage='./hp.jpg'
             blendMode='multiply'
             backgroundRepeat='no-repeat'
-            width='50%'
-            height='100%'
-            backgroundSize='cover'
+            width={{
+                'sm' : '100%',
+                'lg' : '50%'
+            }}
+            height={{
+                'sm' : '100%',
+                'lg' : '100%'
+            }}
+            backgroundSize={{
+                'lg' : 'cover'
+            }}
             position='relative'
-            right='4%'>
+            right={{
+                'sm' : '70%',
+                'lg' : '4%'
+            }}>
             </Box>
         </Box>
     )
