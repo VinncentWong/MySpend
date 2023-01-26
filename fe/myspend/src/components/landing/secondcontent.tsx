@@ -1,28 +1,31 @@
 import { Box, Flex, Image, Text } from "@chakra-ui/react";
+import { biruMuda, black, blue, fontFamilyInter } from '../../styling/style';
 
 const SecondContent = () => {
 
-    const blue = '#215C94';
-    const black = '#1A2127';
-    const biruMuda = '#EDEFFB';
-    const fontFamily = 'Inter, sans-serif';
-
     return(
         <Box
-        position='absolute'
         backgroundColor={biruMuda}
         flexWrap='wrap'
+        width='100%'
+        height='100%'
         >
-            <Text
-            fontFamily={fontFamily}
-            color={blue}
-            fontWeight={600}
-            fontSize={{
-                'lg' : '40px' 
-            }}
-            marginTop='2rem'
-            width='50%'
-            marginLeft='27%'>Keep your budget update</Text>
+            <Box
+            position='relative'
+            width='100%'
+            backgroundSize='cover'>
+                <Text
+                fontFamily={fontFamilyInter}
+                color={blue}
+                fontWeight={600}
+                fontSize={{
+                    'lg' : '40px' 
+                }}
+                width='40%'
+                position='relative'
+                left='30%'
+                paddingTop='3%'>Keep your budget update</Text>
+            </Box>
             <Flex
             flexDir='row'
             width='100%'
@@ -32,7 +35,7 @@ const SecondContent = () => {
                 flexDir='column'
                 alignItems='center'
                 width='30%'
-                marginTop='13rem'
+                marginTop='7rem'
                 marginLeft='2rem'>
                     <Image
                         src = '/gambar1_landing.jpg'
@@ -41,7 +44,7 @@ const SecondContent = () => {
                         boxSize='35%'>
                     </Image>
                     <Text
-                    fontFamily={fontFamily}
+                    fontFamily={fontFamilyInter}
                     color={blue}
                     fontSize={{
                         'lg' : '30px'
@@ -58,7 +61,7 @@ const SecondContent = () => {
                         'lg' : '50%'
                     }}
                     marginTop={'2px'}>
-                        We bring togeher all of your accounts, bills and more, 
+                        We bring together all of your accounts, bills and more, 
                         so you can conveniently manage your 
                         finances from one dashboard
                     </Text>
@@ -67,14 +70,14 @@ const SecondContent = () => {
                 flexDir='column'
                 alignItems='center'
                 width='30%'
-                marginTop='13rem'>
+                marginTop='7rem'>
                     <Image
                         src = '/gambar2_landing.jpg'
                         borderRadius='full'
                         boxSize='35%'>
                     </Image>
                     <Text
-                    fontFamily={fontFamily}
+                    fontFamily={fontFamilyInter}
                     color={blue}
                     fontSize={{
                         'lg' : '30px'
@@ -99,7 +102,7 @@ const SecondContent = () => {
                 flexDir='column'
                 alignItems='center'
                 width='30%'
-                marginTop='13rem'
+                marginTop='7rem'
                 marginRight='2rem'>
                     <Image
                         src = '/gambar3_landing.jpg'
@@ -108,7 +111,7 @@ const SecondContent = () => {
                         boxSize='35%'>
                     </Image>
                     <Text
-                    fontFamily={fontFamily}
+                    fontFamily={fontFamilyInter}
                     color={blue}
                     fontSize={{
                         'lg' : '30px'
