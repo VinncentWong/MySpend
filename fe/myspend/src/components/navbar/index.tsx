@@ -5,15 +5,19 @@ const black = '#1A2127';
 
 const Navbar = () => {
     return(
-        <Flex 
+        <Flex
         flexDir='row'
         backgroundColor='#EDE0F1'
         flexWrap='wrap'>
             <Box 
-            width='15%'
+            width={{
+                'lg' : '15%'
+            }}
             height='100%'
             position='relative'
-            left='10%'>
+            left={{
+                'lg' : '10%'
+            }}>
                 <Link 
                 display='flex' 
                 flexDir='row'
@@ -29,14 +33,20 @@ const Navbar = () => {
             </Box>
             <Box
             position='relative'
-            left='30%'
+            left={{
+                'sm' : '15%',
+                'lg' : '30%'
+            }}
             display='flex'
             flexDir='row'
             gap={{
+                'sm' : '2rem',
                 'lg' : '4rem'
             }}
             alignItems={'center'}
-            width='30%'
+            width={{
+                'lg' : '30%'
+            }}
             flexWrap='wrap'>
                 <Link><Text
                 fontFamily={fontFamily}
