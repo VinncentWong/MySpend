@@ -278,7 +278,8 @@ const RegisterPage = () => {
                         <Text
                         fontFamily={fontFamilyInter}>Already have an account? <Link 
                             color={blue} 
-                            fontFamily={fontFamilyInter}>
+                            fontFamily={fontFamilyInter}
+                            href='/login'>
                                 Sign in
                             </Link>
                         </Text>
