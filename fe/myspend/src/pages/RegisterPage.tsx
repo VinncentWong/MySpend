@@ -46,17 +46,21 @@ const RegisterPage = () => {
 
     return(
         <Flex
-        border='4px solid black'
         width='100%'
         height='100%'
         backgroundImage='/background_auth.svg'
         backgroundSize='cover'
-        position='relative'>
+        position='relative'
+        flexDir={{
+            'sm' : 'column',
+            'lg' : 'row'
+        }}
+        flexWrap='wrap'>
             <Flex
             flexWrap='wrap'
             flexDir='row'
-            border='4px solid green'
             width={{
+                'sm' : '50%',
                 'lg' : '23%'
             }}
             marginLeft={{
@@ -65,34 +69,52 @@ const RegisterPage = () => {
             height={{
                 'lg' : '100%'
             }}
-            alignSelf='flex-end'
+            alignSelf={{
+                'sm' : 'center',
+                'lg' : 'flex-end'
+            }}
+            marginTop={{
+                'sm' : '3%',
+                'lg' : '0'
+            }}
             marginBottom={{
+                'sm' : '10%',
                 'lg' : '20%'
             }}>
                 <Box
-                border = '4px solid brown'
                 backgroundColor='white'
-                borderRadius='14px'>
+                borderRadius='14px'
+                height={{
+                    'lg' : '20%'
+                }}>
                     <Image src='/Logo.svg'></Image>
                 </Box>
                 <Text
+                width='70%'
                 fontFamily={fontFamilyNunito}
                 fontWeight='700'
-                border='4px solid pink'
                 paddingTop={{
-                    'lg' : '6%'
+                    'sm' : '7%',
+                    'lg' : '1%'
                 }}
                 fontSize={{
+                    'sm' : '23px',
                     'lg' : '40px'
                 }}
-                color='white'>My Spend</Text>
+                color='white'
+                marginLeft={{
+                    'sm' : '5%',
+                    'lg' : '5%'
+                }}
+                alignSelf={{
+                    'lg' : 'center'
+                }}>My Spend</Text>
             </Flex>
             <Card
             width={{
                 'lg' : '50%'
             }}
             borderRadius='14px'
-            border='4px solid yellow'
             position='relative'
             marginTop={{
                 'lg' : '5%'
@@ -104,6 +126,7 @@ const RegisterPage = () => {
                 'lg' : '85%'
             }}
             marginBottom={{
+                'sm' : '10%',
                 'lg' : '5%'
             }}>
                 <CardHeader>
@@ -120,17 +143,15 @@ const RegisterPage = () => {
                     fontWeight='300'>It’s free and easy</Text>
                 </CardHeader>
                 <CardBody
-                alignItems='center'
-                border='4px solid red'>
+                alignItems='center'>
                     <Flex
                     flexDir={{
                         'lg' : 'column'
                     }}
-                    border='4px solid brown'
                     flexWrap='wrap'
                     gap='1rem'>
                         <Box
-                        border='4px solid purple'>
+                        width='100%'>
                             <FormControl
                             isRequired
                             isInvalid={!isNameValid}>
@@ -156,7 +177,7 @@ const RegisterPage = () => {
                             </FormControl>
                         </Box>
                         <Box
-                        border='4px solid red'>
+                        width='100%'>
                             <FormControl isRequired isInvalid={!isPasswordValid}>
                                 <FormLabel
                                 fontFamily={fontFamilyInter}
@@ -164,8 +185,7 @@ const RegisterPage = () => {
                                     'lg' : '16px'
                                 }}
                                 fontWeight='500'>Password</FormLabel>
-                                <InputGroup
-                                border = '4px solid green'>
+                                <InputGroup>
                                     <Input 
                                     variant='filled'
                                     value={password}
@@ -173,7 +193,6 @@ const RegisterPage = () => {
                                     placeholder='Enter your password'
                                     type={show? 'text' : 'password'}></Input>
                                     <InputRightElement
-                                    border='4px solid blue'
                                     width={{
                                         'lg' : '15%'
                                     }}>
@@ -207,7 +226,7 @@ const RegisterPage = () => {
                             </FormControl>
                         </Box>
                         <Box
-                        border='4px solid blue'>
+                        width='100%'>
                             <FormControl 
                             isRequired
                             isInvalid={!isEmailValid}>
@@ -234,7 +253,6 @@ const RegisterPage = () => {
                             </FormControl>
                         </Box>
                         <Flex
-                        border='4px solid green'
                         flexDir='row'>
                             <Checkbox
                             onChange={checkHandler}
@@ -255,10 +273,8 @@ const RegisterPage = () => {
                     </Flex>
                 </CardBody>
                 <CardFooter 
-                border='4px solid grey'
                 flexDir='row'>
-                    <Box
-                    border='4px solid green'>
+                    <Box>
                         <Text
                         fontFamily={fontFamilyInter}>Already have an account? <Link 
                             color={blue} 
@@ -268,11 +284,14 @@ const RegisterPage = () => {
                         </Text>
                     </Box>
                     <Button
-                    border='4px solid black'
                     backgroundColor={blue}
                     colorScheme='blue'
                     marginLeft='30%'
-                    onSubmit={submitHandler}>
+                    onSubmit={submitHandler}
+                    marginTop={{
+                        'sm' : '2%',
+                        'lg' : '0'
+                    }}>
                         <Text
                         fontFamily={fontFamilyInter}
                         fontSize={{
