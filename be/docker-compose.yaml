@@ -1,0 +1,37 @@
+version: '3.7'
+services:
+  api:
+    container_name: api
+    build: .
+    restart: on-failure
+    networks:
+      - myspend_network
+    depends_on:
+      - postgres
+    env_file:
+      - .env.docker
+    environment:
+      - host=postgres
+      - port=5432
+      - user=postgres
+      - password=myspend
+      - dbname=myspend
+      - secret_key=secret_key
+  postgres:
+    container_name: postgres_myspend
+    image: postgres:latest
+    environment:
+      - POSTGRES_PASSWORD=${password}
+    expose:
+      - 5432
+    ports:
+      - 6000:5432
+    volumes:
+      - postgres_volume:/var/lib/postgresql/data
+    networks:
+      - myspend_network
+volumes:
+  postgres_volume:
+
+networks:
+  myspend_network:
