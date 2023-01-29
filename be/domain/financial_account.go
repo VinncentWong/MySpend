@@ -7,5 +7,6 @@ type FinancialAccount struct {
 	Bankname      string `json:"bankname"`
 	Username      string `json:"username"`
 	Accountnumber string `json:"accountnumber"`
+	TotalBalance  uint   `json:"totalbalance"`
 	UserID        uint
 }
