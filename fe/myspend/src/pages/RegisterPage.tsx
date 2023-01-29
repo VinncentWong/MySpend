@@ -1,5 +1,8 @@
 import { Box, Button, Card, CardBody, CardFooter, CardHeader, Checkbox, Flex, FormControl, FormErrorMessage, FormHelperText, FormLabel, Image, Input, InputGroup, InputRightElement, Link, Text } from "@chakra-ui/react"
+import { string } from "prop-types";
 import { ChangeEvent, FormEvent, MouseEvent, useState } from "react";
+import { useNavigate } from "react-router-dom";
+import api from "../api";
 import { blue, fontFamilyInter, fontFamilyNunito } from '../styling/style';
 
 const RegisterPage = () => {
@@ -10,7 +13,8 @@ const RegisterPage = () => {
     const [password, setPassword] = useState<string>("");
     const [email, setEmail] = useState<string>("");
     const [show, setShow] = useState<boolean>(false);
-    const [check, setCheck] = useState<boolean>(false);
+    const [notcheck, setNotCheck] = useState<boolean>(true);
+    const navigate = useNavigate();
 
     const isNameValid = name.length >= 6;
     const isPasswordValid = password.length >= 6;
@@ -33,12 +37,31 @@ const RegisterPage = () => {
     }
 
     const checkHandler = (e: ChangeEvent<HTMLInputElement>) => {
-        setCheck(!check);
+        console.log("check terpanggil dengan nilai ", notcheck)
+        setNotCheck(!notcheck);
     }
 
     const submitHandler = (e: FormEvent<HTMLButtonElement>) => {
-        if(isNameValid && isPasswordValid && isEmailValid && check){
+        console.log(`terpanggil dengan
+        isNameValid = ${isNameValid}
+        isPasswordValid = ${isPasswordValid}
+        isEmailValid = ${isEmailValid}
+        notcheck = ${!notcheck}
+        `)
+        if(isNameValid && isPasswordValid && isEmailValid && !notcheck){
             // call API
+            const response =  api.post("/user/register", {
+                "name" : name,
+                "email" : email,
+                "password" : password
+            });
+            response.then((data) => {
+                console.log(JSON.stringify(data));
+                navigate("/");
+            }).catch((err) => {
+                console.log(JSON.stringify(err));
+            });
+            e.preventDefault();
         } else {
             e.preventDefault();
         }
@@ -288,7 +311,7 @@ const RegisterPage = () => {
                     backgroundColor={blue}
                     colorScheme='blue'
                     marginLeft='30%'
-                    onSubmit={submitHandler}
+                    onClick={submitHandler}
                     marginTop={{
                         'sm' : '2%',
                         'lg' : '0'
