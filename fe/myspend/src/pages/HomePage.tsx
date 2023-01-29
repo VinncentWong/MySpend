@@ -7,7 +7,6 @@ import { fontFamilyInter } from "../styling/style";
 const HomePage = () => {
     return(
         <Box
-        border='4px solid green'
         width={{
             'lg' : '100%'
         }}
@@ -16,26 +15,22 @@ const HomePage = () => {
         }}
         flexWrap='wrap'>
             <ThirdContent useText={false}/>
-            <Box
-            border='4px solid grey'>
+            <Box>
                 <Box
-                border='4px solid red'
                 marginLeft={{
                     'lg' : '4%'
                 }}>
                     <Accordion
                     allowToggle
                     allowMultiple
-                    defaultIndex={[0]}
-                    border='4px solid pink'>
+                    defaultIndex={[0]}>
                         <AccordionItem>
-                            <AccordionButton border='4px solid orange'>
+                            <AccordionButton>
                                 <Box textAlign='left'>
                                     <Text
                                     fontFamily={fontFamilyInter}>Apa itu My Spend?</Text>
                                 </Box>
                                 <AccordionIcon
-                                border='4px solid blue'
                                 marginLeft={{
                                     'sm' : '65%',
                                     'lg' : '80%'
@@ -56,10 +51,8 @@ const HomePage = () => {
                             width={{
                                 'sm' : '100%',
                                 'lg' : '100%'
-                            }}
-                            border='4px solid orange'>
+                            }}>
                                 <Box textAlign='left'
-                                border='4px solid green'
                                 marginLeft={{
                                     'sm' : '-1.1%',
                                     'lg' : '-0.5%'
@@ -71,7 +64,6 @@ const HomePage = () => {
                                     }}>Apakah My Spend aman digunakan?</Text>
                                 </Box>
                                 <AccordionIcon
-                                border='4px solid blue'
                                 marginLeft={{
                                     'sm' : '48%',
                                     'lg' : '65.7%'
@@ -92,10 +84,8 @@ const HomePage = () => {
                             width={{
                                 'sm' : '100%',
                                 'lg' : '100%'
-                            }}
-                            border='4px solid orange'>
+                            }}>
                                 <Box textAlign='left'
-                                border='4px solid green'
                                 marginLeft={{
                                     'sm' : '-1.1%',
                                     'lg' : '-0.5%'
@@ -107,7 +97,6 @@ const HomePage = () => {
                                     }}>Apa saja fitur My Spend?</Text>
                                 </Box>
                                 <AccordionIcon
-                                border='4px solid blue'
                                 marginLeft={{
                                     'sm' : '57%',
                                     'lg' : '74.8%'
