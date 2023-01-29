@@ -2,6 +2,7 @@ import { Box, Button, Fade, Image, Text } from "@chakra-ui/react";
 import React, { useEffect, useMemo } from "react";
 import { fontFamilyInter } from '../../styling/style';
 import { ArrowForwardIcon } from "@chakra-ui/icons";
+import { useNavigate } from 'react-router-dom';
 
 const FirstContent = () => {
 
@@ -10,7 +11,8 @@ const FirstContent = () => {
         'All your money in one place',
         'Keep your budget update'
     ];
-
+    
+    const navigate = useNavigate();
     const [index, setIndex] = React.useState<number>(0);
 
     useEffect(() => {
@@ -78,6 +80,11 @@ const FirstContent = () => {
                     'sm' : '60%',
                     'lg' : '30%'
                 }}
+                onClick={
+                    (e) => {
+                        navigate("/register");
+                    }
+                }
                 rightIcon={<ArrowForwardIcon color='white'/>}>
                     <Box
                     width='60%'>
