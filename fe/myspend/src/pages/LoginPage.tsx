@@ -1,11 +1,14 @@
 import { Box, Button, Card, CardBody, CardFooter, CardHeader, Checkbox, Flex, FormControl, FormErrorMessage, FormHelperText, FormLabel, Image, Input, InputGroup, InputRightElement, Link, Text } from "@chakra-ui/react"
 import { ChangeEvent, FormEvent, MouseEvent, useState } from "react";
+import { useNavigate } from "react-router-dom";
+import api from "../api";
 import { blue, fontFamilyInter, fontFamilyNunito } from '../styling/style';
 
 const LoginPage = () => {
     const [password, setPassword] = useState<string>("");
     const [email, setEmail] = useState<string>("");
     const [show, setShow] = useState<boolean>(false);
+    const navigate = useNavigate();
 
     const passwordHandler = (e: ChangeEvent<HTMLInputElement>) => {
         setPassword(e.target.value);
@@ -20,8 +23,13 @@ const LoginPage = () => {
     }
 
 
-    const submitHandler = (e: FormEvent<HTMLButtonElement>) => {
-        e.preventDefault();
+    const submitHandler = async (e: FormEvent<HTMLButtonElement>) => {
+       const response = await api.post("/user/login", {
+        "email" : email,
+        "password" : password
+       })
+       localStorage.setItem("user", JSON.stringify(response));
+       navigate("/home");
     }
 
     return(
@@ -198,13 +206,13 @@ const LoginPage = () => {
                         'sm' : '25%',
                         'lg' : '45%'
                     }}
-                    onSubmit={submitHandler}>
+                    onClick={submitHandler}>
                         <Text
                         fontFamily={fontFamilyInter}
                         fontSize={{
                             'lg' : '14px'
                         }}
-                        fontWeight='600'>Create account</Text>
+                        fontWeight='600'>Login</Text>
                     </Button>
                 </CardFooter>
             </Card>
