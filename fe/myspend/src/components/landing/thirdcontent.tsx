@@ -2,11 +2,11 @@ import { ArrowForwardIcon } from "@chakra-ui/icons";
 import { Box, Button, Card, CardBody, CardFooter, CardHeader, Flex, Heading, Image, Stack, Text } from "@chakra-ui/react"
 import { blue, fontFamilyInter } from '../../styling/style';
 
-const ThirdContent = () => {
+const ThirdContent = ({useText}: {useText: boolean}) => {
 
     return(
         <Box>
-            <Box
+            {useText && <Box
             width={{
                 'sm' : '60%',
                 'lg' : '53%'
@@ -27,6 +27,7 @@ const ThirdContent = () => {
                     Take a deeper dive into a 
                     new way to track your money</Text>
             </Box>
+            }
             <Flex
             flexDir='row'
             width='100%'
