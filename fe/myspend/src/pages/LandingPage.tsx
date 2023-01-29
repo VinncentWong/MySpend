@@ -11,7 +11,7 @@ const LandingPage = () => {
             <Navbar></Navbar>
             <FirstContent></FirstContent>
             <SecondContent></SecondContent>
-            <ThirdContent></ThirdContent>
+            <ThirdContent useText></ThirdContent>
             <Footer></Footer>
         </Box>
     )
