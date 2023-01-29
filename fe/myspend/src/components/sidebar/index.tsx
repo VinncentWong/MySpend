@@ -5,7 +5,6 @@ import { fontFamilyInter } from "../../styling/style";
 const Sidebar = () => {
     return(
         <Stack
-        border='4px solid blue'
         spacing={{
             'lg' : '20%'
         }}
@@ -15,13 +14,10 @@ const Sidebar = () => {
             'lg' : '1'
         }}>
             <Button
-            border='4px solid yellow'
             width='100%'>
                 <Flex
-                border='4px solid grey'
                 width='100%'>
-                    <Box 
-                    border='4px solid green'>
+                    <Box>
                         <Image
                         src='/home.svg'
                         paddingTop={{
@@ -30,19 +26,15 @@ const Sidebar = () => {
                     </Box> 
                     <Text
                     fontFamily={fontFamilyInter}
-                    border='4px solid pink'
                     paddingLeft={{
                         'lg' : '20px'
                     }}>Home</Text>
                 </Flex>
             </Button>
-            <Button
-            border='4px solid red'>
+            <Button>
                  <Flex
-                border='4px solid grey'
                 width='100%'>
-                    <Box 
-                    border='4px solid green'>
+                    <Box>
                         <Image
                         src='/dashboard.svg'
                         paddingTop={{
@@ -51,19 +43,15 @@ const Sidebar = () => {
                     </Box> 
                     <Text
                     fontFamily={fontFamilyInter}
-                    border='4px solid pink'
                     paddingLeft={{
                         'lg' : '15px'
                     }}>Dashboard</Text>
                 </Flex>
             </Button>
-            <Button
-            border='4px solid black'>
+            <Button>
                  <Flex
-                border='4px solid grey'
                 width='100%'>
-                    <Box 
-                    border='4px solid green'>
+                    <Box>
                         <Image
                         src='/folder.svg'
                         paddingTop={{
@@ -72,12 +60,10 @@ const Sidebar = () => {
                     </Box> 
                     <Text
                     fontFamily={fontFamilyInter}
-                    border='4px solid pink'
                     paddingLeft={{
                         'lg' : '13px'
                     }}>Manage it</Text>
-                    <Box
-                    border='4px solid red'>
+                    <Box>
                         <Image
                         src='/crown.svg'
                         paddingLeft={{
@@ -89,13 +75,10 @@ const Sidebar = () => {
                     </Box>
                 </Flex>
             </Button>
-            <Button
-            border='4px solid grey'>
+            <Button>
                  <Flex
-                border='4px solid grey'
                 width='100%'>
-                    <Box 
-                    border='4px solid green'>
+                    <Box>
                         <Image
                         src='/profile.svg'
                         paddingTop={{
@@ -104,7 +87,6 @@ const Sidebar = () => {
                     </Box> 
                     <Text
                     fontFamily={fontFamilyInter}
-                    border='4px solid pink'
                     paddingLeft={{
                         'lg' : '17px'
                     }}>Profile</Text>
