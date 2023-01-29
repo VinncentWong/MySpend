@@ -1,6 +1,7 @@
 package usecase
 
 import (
+	"errors"
 	"module/app/user/repository"
 	"module/domain"
 	"module/dto/user"
@@ -17,6 +18,10 @@ func NewUserService(userRepository *repository.UserRepository) *UserService {
 }
 
 func (s *UserService) CreateUser(dto *user.UserRegister) (*domain.User, error) {
+	user, _ := s.repo.GetUserByEmail(dto.Email)
+	if user != nil {
+		return nil, errors.New("email already exist")
+	}
 	result, err := s.repo.CreateUser(dto)
 	if err != nil {
 		return nil, err
