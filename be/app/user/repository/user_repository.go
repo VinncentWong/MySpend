@@ -49,3 +49,12 @@ func (ur *UserRepository) Login(dto *user.UserLogin) (*domain.User, error) {
 		return nil, err
 	}
 }
+
+func (ur *UserRepository) GetUserByEmail(email string) (*domain.User, error) {
+	var container domain.User
+	result := ur.db.Where("email = ?", email).Take(&container)
+	if result.Error != nil {
+		return nil, result.Error
+	}
+	return &container, nil
+}
