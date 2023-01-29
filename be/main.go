@@ -7,7 +7,9 @@ import (
 	"module/app/user/usecase"
 	"module/infrastructure"
 	"module/rest"
+	"os"
 
+	"github.com/gin-contrib/cors"
 	"github.com/gin-gonic/gin"
 	"github.com/joho/godotenv"
 )
@@ -15,7 +17,7 @@ import (
 func main() {
 	// Load Env
 	err := godotenv.Load()
-	if err != nil {
+	if err != nil && os.Getenv("device") != "docker" {
 		log.Fatalf("can't load env properties, %s", err.Error())
 		return
 	}
@@ -33,7 +35,11 @@ func main() {
 
 	// Routing Initialization
 	r := gin.Default()
-
+	r.Use(cors.New(cors.Config{
+		AllowAllOrigins: true,
+		AllowMethods:    []string{"*"},
+		AllowHeaders:    []string{"*"},
+	}))
 	// User App
 	userRepo := repository.NewUserRepository()
 	userService := usecase.NewUserService(userRepo)
@@ -41,5 +47,5 @@ func main() {
 
 	rest.UserRouting(r, userHandler)
 
-	r.Run()
+	r.Run(":8000")
 }
