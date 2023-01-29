@@ -1,12 +1,14 @@
 package handler
 
 import (
+	"fmt"
 	"module/app/user/usecase"
 	"module/dto/user"
 	"module/util"
 	"net/http"
 
 	"github.com/gin-gonic/gin"
+	"github.com/go-playground/validator/v10"
 )
 
 type UserHandler struct {
@@ -26,9 +28,15 @@ func (h *UserHandler) CreateUser(c *gin.Context) {
 		util.SendResponse(c, http.StatusInternalServerError, "binding exception occured", false, nil)
 		return
 	}
+	err = validator.New().Struct(container)
+	if err != nil {
+		validationError := err.(validator.ValidationErrors)
+		util.SendResponse(c, http.StatusBadRequest, validationError.Error(), false, nil)
+		return
+	}
 	result, err := h.usecase.CreateUser(&container)
 	if err != nil {
-		util.SendResponse(c, http.StatusInternalServerError, "kesalahan internal sistem", false, nil)
+		util.SendResponse(c, http.StatusInternalServerError, fmt.Sprintf("internal server error with message %s", err.Error()), false, nil)
 		return
 	}
 	util.SendResponse(c, http.StatusCreated, "sukses membuat user", true, result)
@@ -41,6 +49,12 @@ func (h *UserHandler) Login(c *gin.Context) {
 		util.SendResponse(c, http.StatusInternalServerError, "binding exception occured", false, nil)
 		return
 	}
+	err = validator.New().Struct(container)
+	if err != nil {
+		validationError := err.(validator.ValidationErrors)
+		util.SendResponse(c, http.StatusBadRequest, validationError.Error(), false, nil)
+		return
+	}
 	result, err := h.usecase.Login(&container)
 	if err != nil {
 		util.SendResponse(c, http.StatusUnauthorized, "user unauthorized", false, nil)
@@ -48,11 +62,13 @@ func (h *UserHandler) Login(c *gin.Context) {
 	}
 	token, err := util.CreateToken(result)
 	if err != nil {
-		util.SendResponse(c, http.StatusInternalServerError, "token creation exception occured", false, nil)
+		util.SendResponse(c, http.StatusInternalServerError, err.Error(), false, nil)
 		return
 	}
-	util.SendResponse(c, http.StatusOK, "user authenticated", true, gin.H{
-		"data": result,
-		"jwt":  token,
+	c.JSON(http.StatusOK, gin.H{
+		"data":    result,
+		"message": "user authenticated",
+		"success": true,
+		"jwt":     token,
 	})
 }
