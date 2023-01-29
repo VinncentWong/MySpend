@@ -10,8 +10,7 @@ const ProtectedRoute = () => {
         <Box>
             <HomeNavbar/>
             <Flex
-            flexDir='row'
-            border='4px solid aqua'>
+            flexDir='row'>
                 <Sidebar/>
                 <Outlet/>
             </Flex>
