@@ -72,3 +72,13 @@ func (h *UserHandler) Login(c *gin.Context) {
 		"jwt":     token,
 	})
 }
+
+func (h *UserHandler) GetUserById(c *gin.Context) {
+	id := c.Param("id")
+	result, err := h.usecase.GetUserById(id)
+	if err != nil {
+		util.SendResponse(c, http.StatusInternalServerError, err.Error(), false, nil)
+		return
+	}
+	util.SendResponse(c, http.StatusOK, "success get user", true, result)
+}
