@@ -7,6 +7,7 @@ import (
 	"module/util"
 
 	"gorm.io/gorm"
+	"gorm.io/gorm/clause"
 )
 
 type UserRepository struct {
@@ -53,6 +54,17 @@ func (ur *UserRepository) Login(dto *user.UserLogin) (*domain.User, error) {
 func (ur *UserRepository) GetUserByEmail(email string) (*domain.User, error) {
 	var container domain.User
 	result := ur.db.Where("email = ?", email).Take(&container)
+	if result.Error != nil {
+		return nil, result.Error
+	}
+	return &container, nil
+}
+
+func (ur *UserRepository) GetUserById(id string) (*domain.User, error) {
+	var container domain.User
+	result := ur.db.
+		Preload(clause.Associations).
+		Where("id = ?", id).Take(&container)
 	if result.Error != nil {
 		return nil, result.Error
 	}
