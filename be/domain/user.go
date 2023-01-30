@@ -1,6 +1,10 @@
 package domain
 
-import "gorm.io/gorm"
+import (
+	"time"
+
+	"gorm.io/gorm"
+)
 
 type User struct {
 	gorm.Model
@@ -8,6 +12,8 @@ type User struct {
 	Email            string             `json:"email"`
 	Password         string             `json:"password"`
 	Activepoint      uint               `json:"activepoint"`
+	IsPremium        bool               `json:"ispremium"`
+	PremiumExpire    time.Time          `json:"premium_expire"`
 	PaymentHistory   []PaymentHistory   `gorm:"foreignKey:UserID"`
 	FinancialAccount []FinancialAccount `gorm:"foreignKey:UserID"`
 	BudgetFivety     []BudgetFivety     `gorm:"foreignKey:UserID"`

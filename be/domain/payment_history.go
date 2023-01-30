@@ -13,5 +13,6 @@ type PaymentHistory struct {
 	LinkPaymentProof string    `json:"linkpaymentproof"`
 	CreatedAt        time.Time `gorm:"autoCreateTime"`
 	UpdatedAt        time.Time `gorm:"autoUpdateTime"`
+	User             User      `json:"-"`
 	UserID           uint
 }

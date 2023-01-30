@@ -33,6 +33,7 @@ type BudgetTwenty struct {
 	CreatedAt  time.Time `json:"createdAt" gorm:"autoCreateTime"`
 	UpdatedAt  time.Time `json:"updatedAt" gorm:"autoUpdateTime"`
 	DeletedAt  time.Time `json:"deletedAt"`
+	User       User      `json:"-"`
 	UserID     uint
 }
 
@@ -47,6 +48,7 @@ type BudgetThirty struct {
 	CreatedAt  time.Time `json:"createdAt" gorm:"autoCreateTime"`
 	UpdatedAt  time.Time `json:"updatedAt" gorm:"autoUpdateTime"`
 	DeletedAt  time.Time `json:"deletedAt"`
+	User       User      `json:"-"`
 	UserID     uint
 }
 
@@ -61,5 +63,6 @@ type BudgetFivety struct {
 	CreatedAt  time.Time `json:"createdAt" gorm:"autoCreateTime"`
 	UpdatedAt  time.Time `json:"updatedAt" gorm:"autoUpdateTime"`
 	DeletedAt  time.Time `json:"deletedAt"`
+	User       User      `json:"-"`
 	UserID     uint
 }
