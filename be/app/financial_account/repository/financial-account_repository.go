@@ -51,7 +51,7 @@ func (r *FinancialAccountRepository) CreateFinancialAccount(id string, dto finan
 
 func (r *FinancialAccountRepository) GetFinancialAccount(id string) (*[]domain.FinancialAccount, error) {
 	var financialAccount []domain.FinancialAccount
-	result := r.db.Model(&domain.User{}).Where("id = ?", id).Find(&financialAccount)
+	result := r.db.Model(&domain.FinancialAccount{}).Preload("User").Where("user_id = ?", id).Find(&financialAccount)
 	if result.Error != nil {
 		return nil, result.Error
 	}
