@@ -41,8 +41,11 @@ func (h *PaymentHandler) CreatePaymentHistory(c *gin.Context) {
 		util.SendResponse(c, http.StatusBadRequest, errs.Error(), false, nil)
 		return
 	}
-	files := form.File["photo"]
-	file := files[0]
+	file, err := c.FormFile("photo")
+	if err != nil {
+		util.SendResponse(c, http.StatusBadRequest, err.Error(), false, nil)
+		return
+	}
 	result, err := h.s.CreatePaymentHistory(id, container, file)
 	if err != nil {
 		util.SendResponse(c, http.StatusInternalServerError, err.Error(), false, nil)
