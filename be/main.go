@@ -33,9 +33,16 @@ func main() {
 		log.Fatal("exception on database initialization")
 		return
 	}
+
 	err = infrastructure.Migrate()
 	if err != nil {
 		log.Fatal("exception when migrating")
+		return
+	}
+
+	err = infrastructure.InitStorage()
+	if err != nil {
+		log.Fatal("exception when init storage")
 		return
 	}
 
@@ -48,6 +55,13 @@ func main() {
 		AllowMethods:    []string{"*"},
 		AllowHeaders:    []string{"*"},
 	}))
+
+	// Make bucket
+	err = infrastructure.CreateBucket("paymentproof")
+	if err != nil {
+		log.Fatal(err.Error())
+		return
+	}
 
 	// User App
 	userRepo := repository.NewUserRepository()
