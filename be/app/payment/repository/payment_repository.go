@@ -2,12 +2,12 @@ package repository
 
 import (
 	"context"
-	"fmt"
 	"mime/multipart"
 	"module/domain"
 	"module/infrastructure"
 	"strconv"
 
+	"github.com/google/uuid"
 	"github.com/minio/minio-go/v7"
 	"gorm.io/gorm"
 	"gorm.io/gorm/clause"
@@ -35,15 +35,33 @@ func (r *PaymentRepository) CreatePaymentHistory(id string, payment domain.Payme
 	if result.Error != nil {
 		return nil, result.Error
 	}
-	payment.LinkPaymentProof = fmt.Sprintf("%s/%d", file.Filename, user.ID)
-	r.minioClient.FPutObject(context.Background(),
-		"payment_proof",
+
+	payment.ID = uuid.New()
+	payment.LinkPaymentProof = file.Filename
+
+	// get buffer from opened file
+	buffer, err := file.Open()
+	if err != nil {
+		return nil, err
+	}
+	defer buffer.Close()
+
+	fileBuffer := buffer
+	if err != nil {
+		return nil, err
+	}
+	_, err = r.minioClient.PutObject(context.Background(),
+		"paymentproof",
 		payment.LinkPaymentProof,
-		fmt.Sprintf("/tmp/%s", payment.LinkPaymentProof),
+		fileBuffer,
+		file.Size,
 		minio.PutObjectOptions{
 			ContentType: file.Header["Content-Type"][0],
 		},
 	)
+	if err != nil {
+		return nil, err
+	}
 	idNumber, err := strconv.Atoi(id)
 	if err != nil {
 		return nil, err
