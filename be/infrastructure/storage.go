@@ -33,14 +33,14 @@ func GetClient() *minio.Client {
 }
 
 func CreateBucket(bucketName string) error {
-	err := minioClient.MakeBucket(context.Background(), "payment_proof", minio.MakeBucketOptions{
+	err := minioClient.MakeBucket(context.Background(), bucketName, minio.MakeBucketOptions{
 		Region: "us-east-1",
 	})
 
 	if err != nil {
-		exist, existErr := minioClient.BucketExists(context.Background(), "payment_proof")
+		exist, existErr := minioClient.BucketExists(context.Background(), bucketName)
 		if exist && existErr == nil {
-			log.Default().Printf("bucket %v already exist", "payment_proof")
+			log.Default().Printf("bucket %v already exist", bucketName)
 			return nil
 		} else {
 			return err
