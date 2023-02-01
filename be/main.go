@@ -49,6 +49,12 @@ func main() {
 		return
 	}
 
+	result := infrastructure.InitRedis()
+	if result != nil {
+		log.Fatal("exception when init redis")
+		return
+	}
+
 	// Routing Initialization
 	r := gin.Default()
 
