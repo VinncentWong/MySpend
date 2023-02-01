@@ -6,6 +6,7 @@ import (
 	pHandler "module/app/payment/handler"
 	"module/app/user/handler"
 	"module/middleware"
+	"module/util"
 	"net/http"
 
 	"github.com/gin-gonic/gin"
@@ -17,6 +18,7 @@ func CheckHealthRouting(route *gin.Engine) {
 			"message": "OK",
 		})
 	})
+	route.GET("/refresh", util.GenerateNewAccessToken)
 }
 
 func UserRouting(route *gin.Engine, handler *handler.UserHandler) {
