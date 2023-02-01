@@ -22,7 +22,7 @@ func (s *PaymentService) CreatePaymentHistory(id string, dto payment.CreatePayme
 		BankName: dto.Bankname,
 		Price:    dto.TotalPayment,
 	}
-	result, err := s.repo.CreatePaymentHistory(id, payment, file)
+	result, err := s.repo.CreatePaymentHistory(id, payment, file, dto.Month)
 	if err != nil {
 		return nil, err
 	}
