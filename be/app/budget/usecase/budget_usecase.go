@@ -26,11 +26,11 @@ func (s *BudgetService) CreateBudget(category string, dto budget.CreateBudget, u
 	if err != nil {
 		return nil, err
 	}
-	from, err := time.Parse("2006-01-02 15:00:00", dto.From)
+	from, err := time.Parse("2006-01-02 15:04:05", dto.From)
 	if err != nil {
 		return nil, err
 	}
-	until, err := time.Parse("2006-01-02 15:00:00", dto.Until)
+	until, err := time.Parse("2006-01-02 15:04:05", dto.Until)
 	if err != nil {
 		return nil, err
 	}
