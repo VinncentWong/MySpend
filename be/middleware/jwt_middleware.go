@@ -1,6 +1,9 @@
 package middleware
 
 import (
+	"context"
+	"fmt"
+	"module/infrastructure"
 	"module/util"
 	"net/http"
 	"os"
@@ -27,12 +30,24 @@ func JwtMiddleware() gin.HandlerFunc {
 				c.Abort()
 				return
 			}
-			_, ok := fixToken.Claims.(jwt.MapClaims)
+			claims, ok := fixToken.Claims.(jwt.MapClaims)
 			if !ok {
 				util.SendResponse(c, http.StatusForbidden, "wrong claims", false, nil)
 				c.Abort()
 				return
 			} else {
+				redisClient := infrastructure.GetRedisClient()
+				result, err := redisClient.Get(context.Background(), fmt.Sprintf("jwt_token/%v", claims["id"])).Result()
+				if err != nil {
+					util.SendResponse(c, http.StatusForbidden, err.Error(), false, nil)
+					c.Abort()
+					return
+				}
+				if result != token {
+					util.SendResponse(c, http.StatusForbidden, "token mismatch", false, nil)
+					c.Abort()
+					return
+				}
 				c.Next()
 			}
 		}
