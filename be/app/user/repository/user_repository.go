@@ -1,22 +1,29 @@
 package repository
 
 import (
+	"context"
+	"fmt"
+	"log"
 	"module/domain"
 	"module/dto/user"
 	"module/infrastructure"
 	"module/util"
+	"time"
 
+	"github.com/redis/go-redis/v9"
 	"gorm.io/gorm"
 	"gorm.io/gorm/clause"
 )
 
 type UserRepository struct {
-	db *gorm.DB
+	db    *gorm.DB
+	redis *redis.Client
 }
 
 func NewUserRepository() *UserRepository {
 	return &UserRepository{
-		db: infrastructure.GetDb(),
+		db:    infrastructure.GetDb(),
+		redis: infrastructure.GetRedisClient(),
 	}
 }
 
@@ -49,6 +56,13 @@ func (ur *UserRepository) Login(dto *user.UserLogin) (*domain.User, error) {
 	} else {
 		return nil, err
 	}
+}
+
+func (ur *UserRepository) SaveToken(token string, id string) error {
+	err := ur.redis.Set(context.Background(), fmt.Sprintf("jwt_token/%s", id), token, 15*time.Minute)
+	result, _ := err.Result()
+	log.Default().Printf("status redis = %v", result)
+	return err.Err()
 }
 
 func (ur *UserRepository) GetUserByEmail(email string) (*domain.User, error) {
