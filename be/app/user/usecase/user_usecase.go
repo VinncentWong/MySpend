@@ -37,6 +37,11 @@ func (s *UserService) Login(dto *user.UserLogin) (*domain.User, error) {
 	return result, nil
 }
 
+func (s *UserService) SaveToken(token string, id string) error {
+	err := s.repo.SaveToken(token, id)
+	return err
+}
+
 func (s *UserService) GetUserById(id string) (*domain.User, error) {
 	result, err := s.repo.GetUserById(id)
 	if err != nil {
