@@ -2,6 +2,9 @@ package main
 
 import (
 	"log"
+	bHandler "module/app/budget/handler"
+	bRepo "module/app/budget/repository"
+	bUsecase "module/app/budget/usecase"
 	fHandler "module/app/financial_account/handler"
 	fRepo "module/app/financial_account/repository"
 	fUsecase "module/app/financial_account/usecase"
@@ -78,10 +81,16 @@ func main() {
 	paymentService := pUsecase.NewPaymentService(paymentRepo)
 	paymentHandler := pHandler.NewPaymentHandler(paymentService)
 
+	// Budget History App
+	budgetRepo := bRepo.NewBudgetRepository()
+	budgetService := bUsecase.NewBudgetService(budgetRepo)
+	budgetHandler := bHandler.NewBudgetHandler(budgetService)
+
 	rest.UserRouting(r, userHandler)
 	rest.FinancialAccountRouting(r, financialAccountHandler)
 	rest.CheckHealthRouting(r)
 	rest.PaymentHistoryRouting(r, paymentHandler)
+	rest.BudgetRouting(r, budgetHandler)
 
 	r.Run(":8000")
 }
