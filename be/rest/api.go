@@ -1,6 +1,7 @@
 package rest
 
 import (
+	bHandler "module/app/budget/handler"
 	fHandler "module/app/financial_account/handler"
 	pHandler "module/app/payment/handler"
 	"module/app/user/handler"
@@ -34,4 +35,11 @@ func FinancialAccountRouting(route *gin.Engine, handler *fHandler.FinancialAccou
 func PaymentHistoryRouting(route *gin.Engine, handler *pHandler.PaymentHandler) {
 	group := route.Group("/payment")
 	group.POST("/create/:id", middleware.JwtMiddleware(), handler.CreatePaymentHistory)
+}
+
+func BudgetRouting(route *gin.Engine, handler *bHandler.BudgetHandler) {
+	group := route.Group("/budget")
+	group.POST("/create", middleware.JwtMiddleware(), middleware.PremiumMiddleware(), handler.CreateBudget)
+	group.GET("/get", middleware.JwtMiddleware(), middleware.PremiumMiddleware(), handler.GetBudget)
+	group.PATCH("/update", middleware.JwtMiddleware(), middleware.PremiumMiddleware(), handler.UpdateBudget)
 }
