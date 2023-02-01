@@ -1,7 +1,6 @@
 package middleware
 
 import (
-	"log"
 	"module/util"
 	"net/http"
 	"os"
@@ -14,14 +13,12 @@ import (
 func JwtMiddleware() gin.HandlerFunc {
 	return func(c *gin.Context) {
 		token := c.Request.Header.Get("Authorization")
-		log.Default().Printf("token = %v", token)
 		if !strings.HasPrefix(token, "Bearer ") {
 			util.SendResponse(c, http.StatusForbidden, "unauthorized", false, nil)
 			c.Abort()
 			return
 		} else {
 			token = token[7:]
-			log.Default().Printf("token = %s", token)
 			fixToken, err := jwt.Parse(token, func(t *jwt.Token) (interface{}, error) {
 				return []byte(os.Getenv("secret_key")), nil
 			})
