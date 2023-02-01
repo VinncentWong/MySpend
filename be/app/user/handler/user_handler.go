@@ -60,16 +60,27 @@ func (h *UserHandler) Login(c *gin.Context) {
 		util.SendResponse(c, http.StatusUnauthorized, "user unauthorized", false, nil)
 		return
 	}
-	token, err := util.CreateToken(result)
+	token, err := util.CreateToken(*result)
+	if err != nil {
+		util.SendResponse(c, http.StatusInternalServerError, err.Error(), false, nil)
+		return
+	}
+	err = h.usecase.SaveToken(*token, fmt.Sprintf("%d", result.ID))
+	if err != nil {
+		util.SendResponse(c, http.StatusInternalServerError, err.Error(), false, nil)
+		return
+	}
+	refreshToken, err := util.CreateToken(*result)
 	if err != nil {
 		util.SendResponse(c, http.StatusInternalServerError, err.Error(), false, nil)
 		return
 	}
 	c.JSON(http.StatusOK, gin.H{
-		"data":    result,
-		"message": "user authenticated",
-		"success": true,
-		"jwt":     token,
+		"data":         result,
+		"message":      "user authenticated",
+		"success":      true,
+		"jwt":          token,
+		"refreshtoken": refreshToken,
 	})
 }
 
