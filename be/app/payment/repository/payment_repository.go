@@ -6,6 +6,7 @@ import (
 	"module/domain"
 	"module/infrastructure"
 	"strconv"
+	"time"
 
 	"github.com/google/uuid"
 	"github.com/minio/minio-go/v7"
@@ -25,7 +26,7 @@ func NewPaymentRepository() *PaymentRepository {
 	}
 }
 
-func (r *PaymentRepository) CreatePaymentHistory(id string, payment domain.PaymentHistory, file *multipart.FileHeader) (*domain.PaymentHistory, error) {
+func (r *PaymentRepository) CreatePaymentHistory(id string, payment domain.PaymentHistory, file *multipart.FileHeader, month uint) (*domain.PaymentHistory, error) {
 	var user domain.User
 	result := r.db.
 		Model(&domain.User{}).
@@ -38,6 +39,8 @@ func (r *PaymentRepository) CreatePaymentHistory(id string, payment domain.Payme
 
 	payment.ID = uuid.New()
 	payment.LinkPaymentProof = file.Filename
+	user.IsPremium = true
+	user.PremiumExpire = time.Now().AddDate(0, int(month), 0)
 
 	// get buffer from opened file
 	buffer, err := file.Open()
@@ -69,6 +72,10 @@ func (r *PaymentRepository) CreatePaymentHistory(id string, payment domain.Payme
 	payment.User = user
 	payment.UserID = uint(idNumber)
 	result = r.db.Create(&payment)
+	if result.Error != nil {
+		return nil, result.Error
+	}
+	result = r.db.Updates(&user)
 	if result.Error != nil {
 		return nil, result.Error
 	}
