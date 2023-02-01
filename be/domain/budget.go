@@ -6,27 +6,14 @@ import (
 	"github.com/google/uuid"
 )
 
-const (
-	Transportation uint = iota
-	FoodAndDrink
-	Groceries
-	Insurance
-	Utilities
-	Technology
-	Savings
-	Investments
-	Emergency
-	Staycation
-	SelfReward
-	Gym
-	Others
-)
+type Type uint
 
 type BudgetTwenty struct {
 	ID         uuid.UUID
 	Budgetname string    `json:"budgetname"`
 	Bankname   string    `json:"bankname"`
-	TypeBudget uint      `json:"typebudget"`
+	TypeBudget Type      `json:"typebudget"`
+	Amount     uint      `json:"amount"`
 	IsFinished bool      `json:"isfinished"`
 	From       time.Time `json:"from"`
 	Until      time.Time `json:"until"`
@@ -41,7 +28,8 @@ type BudgetThirty struct {
 	ID         uuid.UUID
 	Budgetname string    `json:"budgetname"`
 	Bankname   string    `json:"bankname"`
-	TypeBudget uint      `json:"typebudget"`
+	TypeBudget Type      `json:"typebudget"`
+	Amount     uint      `json:"amount"`
 	IsFinished bool      `json:"isfinished"`
 	From       time.Time `json:"from"`
 	Until      time.Time `json:"until"`
@@ -56,7 +44,8 @@ type BudgetFivety struct {
 	ID         uuid.UUID
 	Budgetname string    `json:"budgetname"`
 	Bankname   string    `json:"bankname"`
-	TypeBudget uint      `json:"typebudget"`
+	TypeBudget Type      `json:"typebudget"`
+	Amount     uint      `json:"amount"`
 	IsFinished bool      `json:"isfinished"`
 	From       time.Time `json:"from"`
 	Until      time.Time `json:"until"`
