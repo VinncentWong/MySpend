@@ -2,6 +2,7 @@ package usecase
 
 import (
 	"errors"
+	"module/app/budget/cache"
 	"module/app/budget/repository"
 	"module/domain"
 	"module/dto/budget"
@@ -12,11 +13,13 @@ import (
 )
 
 type BudgetService struct {
+	c    *cache.BudgetCache
 	repo *repository.BudgetRepository
 }
 
-func NewBudgetService(r *repository.BudgetRepository) *BudgetService {
+func NewBudgetService(r *repository.BudgetRepository, c *cache.BudgetCache) *BudgetService {
 	return &BudgetService{
+		c:    c,
 		repo: r,
 	}
 }
@@ -88,7 +91,11 @@ func (s *BudgetService) CreateBudget(category string, dto budget.CreateBudget, u
 }
 
 func (s *BudgetService) GetBudget(category string, userId string) (any, error) {
-	result, err := s.repo.GetBudget(category, userId)
+	result, err := s.c.GetBudget(category, userId)
+	if err == nil {
+		return result, nil
+	}
+	result, err = s.repo.GetBudget(category, userId)
 	if err != nil {
 		return nil, err
 	}
