@@ -7,11 +7,18 @@ import (
 	"module/dto/user"
 )
 
-type UserService struct {
-	repo *repository.UserRepository
+type IUserService interface {
+	CreateUser(dto *user.UserRegister) (*domain.User, error)
+	Login(dto *user.UserLogin) (*domain.User, error)
+	SaveToken(token string, id string) error
+	GetUserById(id string) (*domain.User, error)
 }
 
-func NewUserService(userRepository *repository.UserRepository) *UserService {
+type UserService struct {
+	repo repository.IUserRepository
+}
+
+func NewUserService(userRepository repository.IUserRepository) IUserService {
 	return &UserService{
 		repo: userRepository,
 	}
