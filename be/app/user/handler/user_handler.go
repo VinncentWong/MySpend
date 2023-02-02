@@ -11,11 +11,17 @@ import (
 	"github.com/go-playground/validator/v10"
 )
 
-type UserHandler struct {
-	usecase *usecase.UserService
+type IUserHandler interface {
+	CreateUser(c *gin.Context)
+	Login(c *gin.Context)
+	GetUserById(c *gin.Context)
 }
 
-func NewUserHandler(usecase *usecase.UserService) *UserHandler {
+type UserHandler struct {
+	usecase usecase.IUserService
+}
+
+func NewUserHandler(usecase usecase.IUserService) IUserHandler {
 	return &UserHandler{
 		usecase: usecase,
 	}
