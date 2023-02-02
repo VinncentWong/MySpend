@@ -1,20 +1,26 @@
 package repository
 
 import (
+	"context"
 	"errors"
+	"fmt"
 	"module/domain"
 	"module/infrastructure"
+	"time"
 
+	"github.com/go-redis/cache/v8"
 	"gorm.io/gorm"
 )
 
 type BudgetRepository struct {
 	db *gorm.DB
+	c  *cache.Cache
 }
 
 func NewBudgetRepository() *BudgetRepository {
 	return &BudgetRepository{
 		db: infrastructure.GetDb(),
+		c:  infrastructure.GetCache(),
 	}
 }
 
@@ -55,6 +61,15 @@ func (r *BudgetRepository) GetBudget(category string, id string) (any, error) {
 		if result.Error != nil {
 			return nil, result.Error
 		}
+		err := r.c.Set(&cache.Item{
+			Ctx:   context.Background(),
+			Key:   fmt.Sprintf("getbudget/50/%s", id),
+			Value: container,
+			TTL:   time.Minute * 10,
+		})
+		if err != nil {
+			return nil, err
+		}
 		return &container, nil
 	case "30":
 		var container domain.BudgetThirty
@@ -62,12 +77,30 @@ func (r *BudgetRepository) GetBudget(category string, id string) (any, error) {
 		if result.Error != nil {
 			return nil, result.Error
 		}
+		err := r.c.Set(&cache.Item{
+			Ctx:   context.Background(),
+			Key:   fmt.Sprintf("getbudget/30/%s", id),
+			Value: container,
+			TTL:   time.Minute * 10,
+		})
+		if err != nil {
+			return nil, err
+		}
 		return &container, nil
 	case "20":
 		var container domain.BudgetTwenty
 		result := r.db.Model(&domain.BudgetTwenty{}).Where("user_id = ?", id).Find(&container)
 		if result.Error != nil {
 			return nil, result.Error
+		}
+		err := r.c.Set(&cache.Item{
+			Ctx:   context.Background(),
+			Key:   fmt.Sprintf("getbudget/20/%s", id),
+			Value: container,
+			TTL:   time.Minute * 10,
+		})
+		if err != nil {
+			return nil, err
 		}
 		return &container, nil
 	}
