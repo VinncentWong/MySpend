@@ -21,7 +21,7 @@ func CheckHealthRouting(route *gin.Engine) {
 	route.GET("/refresh", util.GenerateNewAccessToken)
 }
 
-func UserRouting(route *gin.Engine, handler *handler.UserHandler) {
+func UserRouting(route *gin.Engine, handler handler.IUserHandler) {
 	group := route.Group("/user")
 	group.POST("/register", handler.CreateUser)
 	group.POST("/login", handler.Login)
