@@ -2,6 +2,7 @@ package main
 
 import (
 	"log"
+	bcCache "module/app/budget/cache"
 	bHandler "module/app/budget/handler"
 	bRepo "module/app/budget/repository"
 	bUsecase "module/app/budget/usecase"
@@ -55,6 +56,11 @@ func main() {
 		return
 	}
 
+	err = infrastructure.InitCache()
+	if err != nil {
+		log.Fatal("exception when init cache")
+		return
+	}
 	// Routing Initialization
 	r := gin.Default()
 
@@ -89,7 +95,8 @@ func main() {
 
 	// Budget History App
 	budgetRepo := bRepo.NewBudgetRepository()
-	budgetService := bUsecase.NewBudgetService(budgetRepo)
+	budgetCache := bcCache.NewBudgetCache()
+	budgetService := bUsecase.NewBudgetService(budgetRepo, budgetCache)
 	budgetHandler := bHandler.NewBudgetHandler(budgetService)
 
 	rest.UserRouting(r, userHandler)
