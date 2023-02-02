@@ -15,12 +15,20 @@ import (
 	"gorm.io/gorm/clause"
 )
 
+type IUserRepository interface {
+	CreateUser(dto *user.UserRegister) (*domain.User, error)
+	Login(dto *user.UserLogin) (*domain.User, error)
+	SaveToken(token string, id string) error
+	GetUserByEmail(email string) (*domain.User, error)
+	GetUserById(id string) (*domain.User, error)
+}
+
 type UserRepository struct {
 	db    *gorm.DB
 	redis *redis.Client
 }
 
-func NewUserRepository() *UserRepository {
+func NewUserRepository() IUserRepository {
 	return &UserRepository{
 		db:    infrastructure.GetDb(),
 		redis: infrastructure.GetRedisClient(),
