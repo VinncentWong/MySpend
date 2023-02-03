@@ -7,11 +7,15 @@ import (
 	"module/dto/payment"
 )
 
-type PaymentService struct {
-	repo *repository.PaymentRepository
+type IPaymentService interface {
+	CreatePaymentHistory(id string, dto payment.CreatePayment, file *multipart.FileHeader) (*domain.PaymentHistory, error)
 }
 
-func NewPaymentService(r *repository.PaymentRepository) *PaymentService {
+type PaymentService struct {
+	repo repository.IPaymentRepository
+}
+
+func NewPaymentService(r repository.IPaymentRepository) IPaymentService {
 	return &PaymentService{
 		repo: r,
 	}
