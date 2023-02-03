@@ -12,10 +12,10 @@ import (
 )
 
 type PaymentHandler struct {
-	s *usecase.PaymentService
+	s usecase.IPaymentService
 }
 
-func NewPaymentHandler(us *usecase.PaymentService) *PaymentHandler {
+func NewPaymentHandler(us usecase.IPaymentService) *PaymentHandler {
 	return &PaymentHandler{
 		s: us,
 	}
