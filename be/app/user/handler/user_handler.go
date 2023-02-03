@@ -45,7 +45,7 @@ func (h *UserHandler) CreateUser(c *gin.Context) {
 		util.SendResponse(c, http.StatusInternalServerError, fmt.Sprintf("internal server error with message %s", err.Error()), false, nil)
 		return
 	}
-	util.SendResponse(c, http.StatusCreated, "sukses membuat user", true, result)
+	util.SendResponse(c, http.StatusCreated, "sukses create user", true, result)
 }
 
 func (h *UserHandler) Login(c *gin.Context) {
