@@ -14,12 +14,16 @@ import (
 	"gorm.io/gorm/clause"
 )
 
+type IPaymentRepository interface {
+	CreatePaymentHistory(id string, payment domain.PaymentHistory, file *multipart.FileHeader, month uint) (*domain.PaymentHistory, error)
+}
+
 type PaymentRepository struct {
 	db          *gorm.DB
 	minioClient *minio.Client
 }
 
-func NewPaymentRepository() *PaymentRepository {
+func NewPaymentRepository() IPaymentRepository {
 	return &PaymentRepository{
 		db:          infrastructure.GetDb(),
 		minioClient: infrastructure.GetClient(),
