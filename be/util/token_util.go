@@ -3,7 +3,6 @@ package util
 import (
 	"context"
 	"fmt"
-	"log"
 	"module/domain"
 	"module/infrastructure"
 	"net/http"
@@ -22,7 +21,6 @@ func GenerateNewAccessToken(c *gin.Context) {
 		return []byte(os.Getenv("secret_key")), nil
 	})
 	exp := accessToken.Claims.(jwt.MapClaims)["exp"].(float64)
-	log.Default().Printf("now = %v, exp = %v", time.Now().Unix(), int64(exp))
 	if int64(exp) > time.Now().Unix() {
 		SendResponse(c, http.StatusUnauthorized, "token still valid", false, nil)
 		return
@@ -31,7 +29,6 @@ func GenerateNewAccessToken(c *gin.Context) {
 		return []byte(os.Getenv("secret_key")), nil
 	})
 	if err != nil {
-		log.Default().Printf("refresh token with error %v", err.Error())
 		if err.Error() != "Token is expired" {
 			SendResponse(c, http.StatusUnauthorized, err.Error(), false, nil)
 			return
@@ -52,7 +49,6 @@ func GenerateNewAccessToken(c *gin.Context) {
 		Name:  name,
 		Email: email,
 	}
-	log.Default().Printf("id = %v", id)
 	newToken, err := CreateToken(user)
 	if err != nil {
 		SendResponse(c, http.StatusInternalServerError, err.Error(), false, nil)
