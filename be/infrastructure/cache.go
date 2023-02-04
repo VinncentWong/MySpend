@@ -1,6 +1,7 @@
 package infrastructure
 
 import (
+	"os"
 	"time"
 
 	cache "github.com/go-redis/cache/v8"
@@ -12,7 +13,7 @@ var redisCache *cache.Cache
 func InitCache() error {
 	ring := rv8.NewRing(&rv8.RingOptions{
 		Addrs: map[string]string{
-			"redis": "localhost:6379",
+			"redis": os.Getenv("redis_server"),
 		},
 		DB: 0,
 	})
