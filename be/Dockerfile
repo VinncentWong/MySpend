@@ -7,6 +7,11 @@ ARG port=[PORT]
 ARG dbname=[DATABASE_NAME]
 ARG secret_key=[SECRET_FOR_JWT]
 ARG device=docker
+ARG minio_user=[MINIO_USER]
+ARG minio_password=[MINIO_PASSWORD]
+ARG minio_endpoint=[MINIO_ENDPOINT]
+ARG redis_address=[REDIS_ADDRESS]
+ARG redis_server=[REDIS_SERVER]
 
 RUN echo ${host}
 RUN mkdir app
@@ -25,6 +30,12 @@ ARG port=[PORT]
 ARG dbname=[DATABASE_NAME]
 ARG secret_key=[SECRET_FOR_JWT]
 ARG device=docker
+ARG minio_user=[MINIO_USER]
+ARG minio_password=[MINIO_PASSWORD]
+ARG minio_endpoint=[MINIO_ENDPOINT]
+ARG redis_address=[REDIS_ADDRESS]
+ARG redis_server=[REDIS_SERVER]
+
 # Assign ARGs to ENV
 ENV host=${host}
 ENV user=${user}
@@ -33,6 +44,11 @@ ENV port=${port}
 ENV dbname=${dbname}
 ENV secret_key=${secret_key}
 ENV device=${device}
+ENV minio_user=${minio_user}
+ENV minio_password=${minio_password}
+ENV minio_endpoint=${minio_endpoint}
+ENV redis_address=${redis_address}
+ENV redis_server=${redis_server}
 
 RUN mkdir app
 WORKDIR /app
