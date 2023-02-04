@@ -42,13 +42,13 @@ func (r *BudgetRepository) CreateBudget(budget any, userId string) (any, error) 
 		if result.Error != nil {
 			return nil, result.Error
 		}
-		return fivetyBudget, nil
+		return thirtyBudget, nil
 	} else if twentyOk {
 		result := r.db.Model(&domain.BudgetTwenty{}).Create(&twentyBudget)
 		if result.Error != nil {
 			return nil, result.Error
 		}
-		return fivetyBudget, nil
+		return twentyBudget, nil
 	}
 	return nil, errors.New("wrong budget type")
 }
