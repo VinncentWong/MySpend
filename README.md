@@ -19,4 +19,18 @@
 ### How to use this project
 - *Make sure you've run all applications and their dependencies*
 - *Don't forget to install [Postman](https://www.postman.com/) or similar applications*
-- Please open my [API documentation]()
+- *Please open my [API documentation](https://documenter.getpostman.com/view/19666540/2s935oKiDA). All the information about the endpoint needed along with additional information about the endpoint is in the postman documentation.*
+- *Have fun with my project!*
+### Tech stack used
+- *[Go Programming Language](https://go.dev/)*
+- *[Postgresql](https://www.postgresql.org/)*
+- *[GORM](https://gorm.io/)* 
+- *[Docker](https://www.docker.com/)* 
+- *[JSON Web Token](https://jwt.io/)*
+- *[MinIO](https://min.io/)*
+- *[Redis](https://redis.io/)*
+- *[Go-redis](https://github.com/redis/go-redis)*
+- *[Go-redis-cache](https://github.com/go-redis/cache)*
+- *[Testify](https://github.com/stretchr/testify)* 
+### Additional Notes
+> This project also already provide unit testing on 3 repositories. You can check it on app directory, happy coding :star_struck:
